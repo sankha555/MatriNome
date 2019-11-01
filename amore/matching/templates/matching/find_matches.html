@@ -1,0 +1,29 @@
+{% extends "matching/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+  <body>
+    <div class="content-section">
+      {% for sugg in pool %}
+        {% if user != sugg.user %}
+          <article class="media content-section">
+            <img class="rounded-circle article-img" src="{{ sugg.image.url }}">
+                <div class="media-body">
+                  <div class="article-metadata">
+                    <a class="mr-2" href="{% url 'view_profile' sugg.id %}">{{ sugg.user.username }}</a>
+                  </div>
+
+                  <h2 class="article-title"><a class="mr-2" href="{% url 'view_profile' sugg.id %}">{{ sugg.name }}</a></h2>
+
+                  <p class="article-content"> {{ sugg.get_age }} Years </p>
+
+                  <!--<p class="article-content"> {{ sugg. }} relationships till now </p>-->
+
+
+                </div>
+            </article>
+          {% endif %}
+      {% endfor %}
+
+    </div>
+  </body>
+{% endblock content %}

@@ -1,0 +1,24 @@
+{% extends "matching/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+  <body>
+
+    <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+              <h2 class="article-title">
+                <a class="mr-2" href="{% url 'view_profile' rel.proposal.user.profile.id %}">{{ rel.proposal.user.profile.name }}</a>
+                  is dating <a class="mr-2" href="{% url 'view_profile' rel.proposal.user.profile.id %}">{{ rel.proposal.to_user.profile.name }}</a>
+              </h2>
+            </div>
+
+                    <form action="{% url 'break_up' rel.id %}" method="post">
+                      {% csrf_token %}
+                      <button type="submit" name="relationship_id" value={{rel.id}} class="btn btn-danger">Break Up</button>
+                    </form>
+
+
+          </div>
+        </article>
+    </body>
+{% endblock content %}

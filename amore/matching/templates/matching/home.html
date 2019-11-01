@@ -1,0 +1,31 @@
+{% extends "matching/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+  <body>
+
+      <article class="media content-section">
+            <div class="media-body">
+              <div class="article-metadata">
+                <a class="mr-2" href="{% url 'profile_update' %}">{{ user.username }}</a>
+              </div>
+              <h2 class="article-title">{{ profile.name }}</h2>
+
+              <p class="article-content"> You have made <b>{{ proposals }}</b> proposals and <b>{{ user.profile.conquests.count }}</b> conquests</p>
+
+              <h2> Wanna make some more ? </h2>
+              <p class="article-content"> Let the hormones overdose ! Click on Find Matches to find the love of your life... </p>
+
+              {% if user.is_authenticated %}
+                {% csrf_token %}
+                {% if profile.user == user %}
+                  <div>
+                    <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'profile_update'  %}">Update Profile</a>
+                  </div>
+                {% endif %}
+              {% endif %}
+            </div>
+          </article>
+
+
+  </body>
+{% endblock content %}
