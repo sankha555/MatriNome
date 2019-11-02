@@ -9,12 +9,12 @@ import smtplib
 @receiver(post_save, sender=Proposal)
 def create_profile(sender, instance, created, **kwargs):
     if created:
-        mail = smtplib.SMTP('mail.gmail.com', settings.EMAIL_PORT)
+        mail = smtplib.SMTP('smtp.gmail.com', settings.EMAIL_PORT)
         mail.ehlo()
         mail.starttls()
 
         message = f'{instance.user.profile.name} has proposed to you ! Check out the proposal now to find your amore ...'
-        mail.login(setting.EMAIL_HOST_USER, settings.EMAIL_HOST_PASSWORD)
+        mail.login(settings.EMAIL_HOST_USER, settings.EMAIL_HOST_PASSWORD)
 
         email = instance.to_user.email
 
