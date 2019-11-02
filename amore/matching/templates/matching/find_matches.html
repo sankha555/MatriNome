@@ -2,7 +2,8 @@
 {% load crispy_forms_tags %}
 {% block content %}
   <body>
-    <div class="content-section">
+    <div class="conquest">
+      <h4><b><font color="white">Click on a User to View Their Profile</font></b></h4>
       {% for sugg in pool %}
         {% if user != sugg.user %}
           <article class="media content-section">

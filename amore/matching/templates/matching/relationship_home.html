@@ -2,23 +2,59 @@
 {% load crispy_forms_tags %}
 {% block content %}
   <body>
+      <center><h4><b>Together Since {{rel.started_at.date}}</b></h4></center>
+      <hr>
+      <table cellspacing=50>
+        <tr>
+          <td cellpadding=100 width=350>
+            <article class="media content-section">
+            <div class="media-body">
+              <div class="article-metadata">
 
-    <article class="media content-section">
-          <div class="media-body">
-            <div class="article-metadata">
-              <h2 class="article-title">
-                <a class="mr-2" href="{% url 'view_profile' rel.proposal.user.profile.id %}">{{ rel.proposal.user.profile.name }}</a>
-                  is dating <a class="mr-2" href="{% url 'view_profile' rel.proposal.user.profile.id %}">{{ rel.proposal.to_user.profile.name }}</a>
-              </h2>
+                    <center><img class="rounded-circle article-img" src="{{ rel.proposal.user.profile.image.url }}"></center>
+                    <br>
+                    <center>
+                      <h2 class="article-title">{{ rel.proposal.user.profile.name }}</h2>
+
+                      <p class="article-content"> {{ rel.proposal.user.profile.get_age }} Years</p>
+                      <p class="article-content"> Born on {{ rel.proposal.user.profile.birthday }}</p>
+                      <p class="article-content"> From {{ rel.proposal.user.profile.city }}</p>
+
+                    </center>
+              </div>
             </div>
+            </article>
+          </td>
+          <td width=350>
+            <article class="media content-section">
+            <div class="media-body">
+              <div class="article-metadata">
+                  <center><img class="rounded-circle article-img" src="{{ rel.proposal.to_user.profile.image.url }}"></center>
+                  <br>
+                    <center>
+                    <h2 class="article-title">{{ rel.proposal.to_user.profile.name }}</h2>
 
-                    <form action="{% url 'break_up' rel.id %}" method="post">
-                      {% csrf_token %}
-                      <button type="submit" name="relationship_id" value={{rel.id}} class="btn btn-danger">Break Up</button>
-                    </form>
+                    <p class="article-content"> {{ rel.proposal.to_user.profile.get_age }} Years</p>
+                    <p class="article-content"> Born on {{ rel.proposal.to_user.profile.birthday }}</p>
+                    <p class="article-content"> From {{ rel.proposal.to_user.profile.city }}</p>
+
+                    </center>
+              </div>
+            </div>
+            </article>
+          </td>
+        </tr>
+      </table>
+
+      <div>
+
+                <form action="{% url 'break_up' rel.id %}" method="post">
+                  {% csrf_token %}
+                  <center><button type="submit" name="relationship_id" value={{rel.id}} class="btn btn-danger">Break Up From Relationship</button></center>
+                </form>
 
 
-          </div>
-        </article>
+      </div>
+
     </body>
 {% endblock content %}
