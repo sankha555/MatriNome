@@ -4,7 +4,7 @@ from django.utils import timezone
 from django.urls import reverse
 
 class Proposal(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     to_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='to_user')
     message = models.TextField(max_length=200)
     sent_at = models.DateTimeField(default=timezone.now)

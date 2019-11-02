@@ -35,8 +35,9 @@
             {% endif %}
 
             <hr>
-            
+
             {% if user != profile.user %}
+              {% if user.profile.status == 0 %}
                   {% csrf_token %}
                   {% if user in profile.conquests.all %}
                     <form action="{% url 'cancel_proposal' profile.id %}" method="post">
@@ -49,6 +50,9 @@
                       <button type="submit" name="profile_id" value={{profile.id}} class="btn btn-primary">Propose {{profile.name}} To Be Your Amore</button>
                     </form>
                   {% endif %}
+                {% else %}
+                  <h4>To propose {{profile.name}} , you need to break up with your existing amore.</h4>
+                {% endif %}
             {% endif %}
 
           </div>

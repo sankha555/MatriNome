@@ -24,7 +24,7 @@ class Profile(models.Model):
     city = models.CharField(max_length=50)
     college = models.CharField(max_length=100)
     interests = models.TextField(max_length=100)
-    image = models.ImageField(default='profile_pics/default.jpg', upload_to='profile_pics')
+    image = models.ImageField(default='default.jpg', upload_to='profile_pics')
 
     status = models.IntegerField(default=0)
     conquests = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, related_name='conquests')

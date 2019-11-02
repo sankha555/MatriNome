@@ -144,14 +144,14 @@ def break_up(request, pk):
     relationship.proposal.save()
     relationship.save()
 
-    return HttpResponseRedirect('home')
+    return redirect('home')
 
 @login_required
 def suggest_matches(request):
 
     user = request.user
 
-    pool = Profile.objects.exclude(sex = user.profile.sex)
+    pool = Profile.objects.exclude(sex = user.profile.sex).exclude(name = " ")
     context = {
         'pool' : pool,
     }

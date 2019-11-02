@@ -13,6 +13,7 @@
             <tr>
               <td width="71%">
                 <div>
+
                   <h2 class="article-title">{{ proposal.user.profile.name }}</h2>
 
                   <p class="article-content"> <!--<img src = "matching/bd.jpeg" height=50, width=50>--> {{ proposal.user.profile.birthday }}</p>
@@ -30,24 +31,28 @@
             <p class="article-content"> <i>" {{ proposal.message }} "</i></p>
           </div>
           {% if proposal.status == 0%}
-            <div >
-              <table cellpadding=10>
-                <tr cellpadding=10>
-                  <td >
-                    <form action="{% url 'decline_proposal' proposal.id %}" method="post">
-                      {% csrf_token %}
-                      <button type="submit" name="proposal_id" value={{proposal.id}} class="btn btn-danger">Decline Proposal</button>
-                    </form>
-                  </td>
-                  <td>
-                    <form action="{% url 'accept_proposal' proposal.id %}" method="post">
-                      {% csrf_token %}
-                      <button type="submit" name="proposal_id" value={{proposal.id}} class="btn btn-primary">Accept {{ proposal.user.profile.name }} As My Amore</button>
-                    </form>
-                  </td>
-                </tr>
-              </table>
-            </div>
+            {% if user.profile.status == 0%}
+              <div >
+                <table cellpadding=10>
+                  <tr cellpadding=10>
+                    <td >
+                      <form action="{% url 'decline_proposal' proposal.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" name="proposal_id" value={{proposal.id}} class="btn btn-danger">Decline Proposal</button>
+                      </form>
+                    </td>
+                    <td>
+                      <form action="{% url 'accept_proposal' proposal.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" name="proposal_id" value={{proposal.id}} class="btn btn-primary">Accept {{ proposal.user.profile.name }} As My Amore</button>
+                      </form>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            {% else %}
+              <h4>To accept {{proposal.user.profile.name }}'s proposal, you need to break up with your existing amore.</h4>
+            {% endif %}
           {% endif %}
 
           </div>
